@@ -1,8 +1,7 @@
 #pragma once
-
 #include "Vector2.h"
 
-class Player
+class Player 
 {
 public:
 	Player();
@@ -10,10 +9,14 @@ public:
 	void Draw();
 private:
 	Vector2 position_;
-	Vector2 dashDirection_; // ダッシュ方向
-	float size_;
-	float speed_;
-	int dashFrame_;         // ダッシュの残り時間
-	float dashSpeed_;       // ダッシュ速度
-	int dashCoolTimer_;    // ダッシュのクールタイム
+	Vector2 dashDirection_;	 // ダッシュ方向
+	Vector2 gaugePosition_;  // ゲージの位置
+	Vector2 gaugeSize_;      // ゲージのサイズ
+	float size_;			 // プレイヤーのサイズ
+	float speed_;			 // プレイヤーの移動速度
+	int dashFrame_;          // ダッシュの残り時間
+	float dashSpeed_;        // ダッシュ速度
+	int dashCooldown_;       // ダッシュのクールタイム
+	int kDashCooldownMax_;   // ダッシュのクールタイムの最大値
+	float dashCooldownRate_; // クールタイムの回復割合
 };
