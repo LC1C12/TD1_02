@@ -82,6 +82,9 @@ void Player::Update(const char keys[256], const char preKeys[256])
 		position_.x += dashDirection_.x * dashSpeed_;
 		position_.y += dashDirection_.y * dashSpeed_;
 
+		// 移動エフェクトの発生
+		moveEffect_.Emit(GetCenterPosition(), dashDirection_);
+
 		dashFrame_--;
 	}
 	// 通常移動
@@ -89,7 +92,17 @@ void Player::Update(const char keys[256], const char preKeys[256])
 	{
 		position_.x += move.x * speed_;
 		position_.y += move.y * speed_;
+
+		// 移動している場合
+		if (length > 0.0f)
+		{
+			// 移動エフェクトの発生
+			moveEffect_.Emit(GetCenterPosition(), move);
+		}
 	}
+
+	// 移動エフェクトの更新
+	moveEffect_.Update();
 
 	// ゲージの位置をプレイヤーの位置に合わせる
 	gaugePosition_.x = position_.x - gaugeSize_.x / 4.3f;
@@ -101,6 +114,9 @@ void Player::Update(const char keys[256], const char preKeys[256])
 
 void Player::Draw()
 {
+	// 移動エフェクトの描画
+	moveEffect_.Draw();
+
 	// プレイヤーの描画処理
 	Novice::DrawBox
 	(
@@ -116,7 +132,7 @@ void Player::Draw()
 	// ダッシュのクールタイムがある場合、ゲージを描画
 	if (dashCooldown_ > 0)
 	{
-		// 
+		// ゲージの背景を描画
 		Novice::DrawBox
 		(
 			static_cast<int>(gaugePosition_.x),
@@ -140,4 +156,14 @@ void Player::Draw()
 			kFillModeSolid
 		);
 	}
+}
+
+Vector2 Player::GetCenterPosition() const
+{
+	Vector2 center = {};
+
+	center.x = position_.x + size_ / 2.0f;
+	center.y = position_.y + size_ / 2.0f;
+
+	return center;
 }

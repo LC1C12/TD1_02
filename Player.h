@@ -1,12 +1,14 @@
 #pragma once
 #include "Vector2.h"
+#include "PlayerMoveEffect.h"
 
-class Player 
+class Player
 {
 public:
 	Player();
 	void Update(const char keys[256], const char preKeys[256]);
 	void Draw();
+	Vector2 GetCenterPosition() const;
 private:
 	Vector2 position_;
 	Vector2 dashDirection_;	 // ダッシュ方向
@@ -19,4 +21,5 @@ private:
 	int dashCooldown_;       // ダッシュのクールタイム
 	int kDashCooldownMax_;   // ダッシュのクールタイムの最大値
 	float dashCooldownRate_; // クールタイムの回復割合
+	MoveEffect moveEffect_;
 };

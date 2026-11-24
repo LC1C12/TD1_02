@@ -8,7 +8,7 @@ const char kWindowTitle[] = "LC1C_12_スズキ_ユイト";
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1440, 900);
+	Novice::Initialize(kWindowTitle, 1920, 1080);
 
 	// キー入力結果を受け取る箱
 	char keys[256] = { 0 };
@@ -41,7 +41,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		///
 
 		// 背景の描画
-		Novice::DrawBox(0, 0, 1440, 900, 0.0f, BLACK, kFillModeSolid);
+		Novice::DrawBox(0, 0, 1920, 1080, 0.0f, BLACK, kFillModeSolid);
 
 		// プレイヤーの描画
 		player.Draw();
